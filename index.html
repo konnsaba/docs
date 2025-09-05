@@ -10,25 +10,26 @@
       margin: 0;
       font-family: 'Zen Maru Gothic', sans-serif;
       background: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
-      background-color: #f4f0e6;
+      background-color: #f7f4ef;
       color: #333;
+      line-height: 1.7;
     }
 
-    /* ヘッダー（皮風） */
+    /* ヘッダー */
     header {
       background: #a47148;
       background-image: linear-gradient(145deg, #a47148, #7a5230);
-      padding: 25px 15px;
-      text-align: center;
-      border-bottom: 10px solid #654321;
-      font-size: 30px;
-      font-weight: 700;
       color: #fff;
-      text-shadow: 2px 2px #4a2f1d;
+      text-align: center;
+      padding: 20px;
+      border-bottom: 8px solid #5a3821;
       border-radius: 0 0 20px 20px;
     }
-
-    /* ナビゲーション */
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+      text-shadow: 2px 2px #4a2f1d;
+    }
     nav {
       margin-top: 10px;
     }
@@ -42,6 +43,20 @@
     }
     nav a:hover {
       border-bottom: 2px dashed #fff;
+    }
+
+    /* メインビジュアル */
+    .hero {
+      background: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80') center/cover;
+      height: 350px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+      font-size: 34px;
+      font-weight: 700;
+      border-radius: 0 0 30px 30px;
     }
 
     /* コンテナ */
@@ -97,7 +112,7 @@
       position: fixed;
       right: 20px;
       bottom: 20px;
-      width: 200px;
+      width: 220px;
       background: #5865F2;
       color: white;
       padding: 15px;
@@ -144,20 +159,36 @@
       background: #90c8a8;
     }
 
+    /* フッター */
+    footer {
+      background: #6b4226;
+      color: #f4f0e6;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      border-radius: 20px 20px 0 0;
+      font-size: 14px;
+    }
+
   </style>
 </head>
 <body>
 
   <!-- ヘッダー -->
   <header>
-    🌲 森のコミュニティ
+    <h1>🌲 森のコミュニティ</h1>
     <nav>
       <a href="#">ホーム</a>
       <a href="#">お知らせ</a>
-      <a href="#">サーバー</a>
+      <a href="#">サーバー紹介</a>
       <a href="#">参加方法</a>
     </nav>
   </header>
+
+  <!-- メインビジュアル -->
+  <div class="hero">
+    森でつながる、あたたかい時間。
+  </div>
 
   <!-- コンテンツ -->
   <main class="container">
@@ -189,6 +220,11 @@
 
   <!-- トップページに戻るボタン -->
   <a href="/" class="back-home-btn" title="トップページに戻る">🏠</a>
+
+  <!-- フッター -->
+  <footer>
+    © 2025 森のコミュニティ All Rights Reserved.
+  </footer>
 
 </body>
 </html>
