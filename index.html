@@ -1,230 +1,329 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>森のコミュニティ</title>
-  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Zen Maru Gothic', sans-serif;
-      background: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
-      background-color: #f7f4ef;
-      color: #333;
-      line-height: 1.7;
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Expo Style — Demo</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&family=Inter:wght@300;400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #ffffff;
+    --muted: #6b6b6b;
+    --accent: #d9353a; /* 赤系アクセント */
+    --accent-2: #0b6b9a; /* 補助色 */
+    --card-bg: #ffffff;
+    --glass: rgba(255,255,255,0.85);
+    --shadow-1: 0 6px 24px rgba(12,12,12,0.08);
+    --container: 1180px;
+  }
+  /* Reset-ish */
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family: "Noto Sans JP", "Inter", system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background:var(--bg);
+    color:#222;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.6;
+  }
 
-    /* ヘッダー */
-    header {
-      background: #a47148;
-      background-image: linear-gradient(145deg, #a47148, #7a5230);
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-      border-bottom: 8px solid #5a3821;
-      border-radius: 0 0 20px 20px;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 28px;
-      text-shadow: 2px 2px #4a2f1d;
-    }
-    nav {
-      margin-top: 10px;
-    }
-    nav a {
-      margin: 0 12px;
-      color: #fff8e1;
-      text-decoration: none;
-      font-weight: bold;
-      border-bottom: 2px dashed transparent;
-      transition: 0.2s;
-    }
-    nav a:hover {
-      border-bottom: 2px dashed #fff;
-    }
+  /* Layout container */
+  .container{max-width:var(--container);margin:0 auto;padding:0 20px}
 
-    /* メインビジュアル */
-    .hero {
-      background: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80') center/cover;
-      height: 350px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
-      font-size: 34px;
-      font-weight: 700;
-      border-radius: 0 0 30px 30px;
-    }
+  /* Header */
+  header.site-header{
+    position:sticky;
+    top:0;
+    z-index:90;
+    backdrop-filter: blur(6px);
+    background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(255,255,255,0.86));
+    border-bottom: 1px solid rgba(20,20,20,0.04);
+  }
+  .header-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;max-width:var(--container);margin:0 auto;padding:14px 20px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand .mark{
+    width:56px;height:56px;border-radius:8px;
+    display:flex;align-items:center;justify-content:center;
+    background: linear-gradient(180deg,#fff,#f7f7f7);
+    box-shadow: 0 6px 18px rgba(12,12,12,0.06);
+    font-weight:900;color:var(--accent);font-family:"Inter",sans-serif;font-size:18px;
+    border:1px solid rgba(0,0,0,0.04)
+  }
+  .brand .title{font-weight:700;font-size:18px;color:#111}
 
-    /* コンテナ */
-    .container {
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
+  nav.top-nav{display:flex;gap:18px;align-items:center}
+  nav.top-nav a{color:#222;text-decoration:none;font-weight:600;padding:6px 8px;border-radius:6px;transition:background .18s, color .18s}
+  nav.top-nav a:hover{background:rgba(217,53,58,0.06);color:var(--accent)}
 
-    /* カード */
-    .card {
-      background: #fffdf8;
-      border: 3px dashed #c49a6c;
-      border-radius: 18px;
-      padding: 25px;
-      margin-bottom: 30px;
-      box-shadow: 4px 4px 10px rgba(0,0,0,0.15);
-      transition: transform 0.2s;
-    }
-    .card:hover {
-      transform: scale(1.01);
-    }
-    .card h2 {
-      font-size: 22px;
-      margin-top: 0;
-      color: #6b4226;
-    }
+  /* Hero */
+  .hero{
+    display:grid;
+    grid-template-columns: 1fr 420px;
+    gap:28px;
+    align-items:center;
+    padding:64px 20px;
+    max-width:var(--container);
+    margin:0 auto;
+  }
+  .hero-left{
+    padding:28px 10px;
+  }
+  .eyebrow{display:inline-block;padding:6px 12px;border-radius:999px;background:linear-gradient(90deg,#fff0f0,#ffecec);color:var(--accent);font-weight:700;font-size:13px;margin-bottom:18px}
+  .hero-title{
+    font-size:clamp(32px,6vw,64px);
+    line-height:0.95;
+    font-weight:900;
+    margin:0 0 18px 0;
+    letter-spacing:-0.02em;
+    color:#111;
+  }
+  .hero-sub{
+    font-size:18px;color:var(--muted);max-width:70ch;margin-bottom:22px;
+  }
+  .hero-cta{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:12px;border:0;font-weight:700;cursor:pointer;box-shadow:var(--shadow-1);text-decoration:none;
+  }
+  .btn--primary{background:var(--accent);color:#fff}
+  .btn--outline{background:transparent;border:2px solid rgba(0,0,0,0.06);color:#111}
 
-    /* ボタン */
-    .button {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      background: #ffe5b4;
-      border: 2px solid #c49a6c;
-      border-radius: 50px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: inset 0 0 5px #fff, 2px 2px 5px rgba(0,0,0,0.2);
-      transition: transform 0.2s;
-    }
-    .button:hover {
-      transform: translateY(-2px);
-    }
-    .button img {
-      width: 20px;
-      height: 20px;
-    }
+  /* Right summary card - simple */
+  .hero-right{
+    background:linear-gradient(180deg,#fff,#fbfbfb);
+    border-radius:14px;padding:18px;box-shadow:var(--shadow-1);border:1px solid rgba(0,0,0,0.04)
+  }
+  .meta-item{display:flex;align-items:center;justify-content:space-between;padding:10px 4px;border-bottom:1px dashed rgba(0,0,0,0.03)}
+  .meta-item:last-child{border-bottom:0}
+  .meta-item .label{font-weight:600;color:var(--muted)}
+  .meta-item .value{font-weight:800;color:#111}
 
-    /* Discord広告 */
-    .discord-banner {
-      position: fixed;
-      right: 20px;
-      bottom: 20px;
-      width: 220px;
-      background: #5865F2;
-      color: white;
-      padding: 15px;
-      border-radius: 14px;
-      font-size: 15px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      animation: pulse 2s infinite;
-      z-index: 1000;
-    }
-    .discord-banner a {
-      color: white;
-      font-weight: bold;
-      text-decoration: none;
-    }
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
+  /* Sections */
+  section.site-section{max-width:var(--container);margin:36px auto;padding:0 20px}
+  .section-head{display:flex;align-items:baseline;gap:12px;margin-bottom:18px}
+  .section-head h3{margin:0;font-size:20px;font-weight:800}
+  .section-head p{margin:0;color:var(--muted);font-size:14px}
 
-    /* トップに戻るボタン */
-    .back-home-btn {
-      position: fixed;
-      bottom: 110px;
-      right: 40px;
-      background: #a8d5ba;
-      color: white;
-      font-size: 26px;
-      text-decoration: none;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      transition: transform 0.2s, box-shadow 0.2s;
-      z-index: 1001;
-    }
-    .back-home-btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 14px rgba(0,0,0,0.3);
-      background: #90c8a8;
-    }
+  /* News grid */
+  .news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .news-card{background:var(--card-bg);border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(8,8,8,0.06);border:1px solid rgba(0,0,0,0.04);display:flex;flex-direction:column}
+  .news-card .thumb{height:160px;background-position:center;background-size:cover}
+  .news-card .body{padding:14px;flex:1;display:flex;flex-direction:column}
+  .news-card .kicker{font-weight:700;color:var(--accent);font-size:13px;margin-bottom:8px}
+  .news-card h4{margin:0 0 8px 0;font-size:18px}
+  .news-card p{color:var(--muted);font-size:14px;margin:0 0 12px 0}
+  .news-card .meta{margin-top:auto;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted)}
 
-    /* フッター */
-    footer {
-      background: #6b4226;
-      color: #f4f0e6;
-      text-align: center;
-      padding: 20px;
-      margin-top: 40px;
-      border-radius: 20px 20px 0 0;
-      font-size: 14px;
-    }
+  /* Events strip */
+  .events-strip{display:flex;gap:12px;overflow-x:auto;padding-bottom:6px}
+  .event-pill{min-width:240px;background:linear-gradient(180deg,#fff,#fbfbfb);border-radius:12px;padding:12px;border:1px solid rgba(0,0,0,0.04);box-shadow:0 8px 20px rgba(8,8,8,0.05)}
+  .event-pill h5{margin:0 0 6px 0;font-size:16px}
+  .event-pill p{margin:0;color:var(--muted);font-size:14px}
 
-  </style>
+  /* Access/map area */
+  .access-grid{display:grid;grid-template-columns:1fr 420px;gap:18px;align-items:start}
+  .map-embed{width:100%;height:320px;border-radius:12px;border:1px solid rgba(0,0,0,0.06);overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.06)}
+  .contact-card{background:linear-gradient(180deg,#fff,#fbfbfb);padding:18px;border-radius:12px;box-shadow:var(--shadow-1);border:1px solid rgba(0,0,0,0.04)}
+
+  /* Footer */
+  footer.site-footer{margin-top:44px;background:linear-gradient(180deg,#fafafa,#f3f3f3);padding:30px 20px;border-top:1px solid rgba(0,0,0,0.04)}
+  .footer-inner{max-width:var(--container);margin:0 auto;display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+  .footer-inner .nav a{margin-right:12px;color:var(--muted);text-decoration:none}
+
+  /* utilities */
+  .muted{color:var(--muted)}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+  /* Responsive */
+  @media (max-width:1100px){
+    .hero{grid-template-columns:1fr 360px}
+    .news-grid{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:800px){
+    .hero{grid-template-columns:1fr;gap:18px;padding:28px 16px}
+    .hero-right{order:2}
+    .news-grid{grid-template-columns:1fr}
+    .access-grid{grid-template-columns:1fr}
+  }
+
+  /* small nice touches */
+  a.cta-link{color:var(--accent);font-weight:800;text-decoration:none}
+</style>
 </head>
 <body>
 
-  <!-- ヘッダー -->
-  <header>
-    <h1>🌲 森のコミュニティ</h1>
-    <nav>
-      <a href="#">ホーム</a>
-      <a href="#">お知らせ</a>
-      <a href="#">サーバー紹介</a>
-      <a href="#">参加方法</a>
+<!-- Header -->
+<header class="site-header" role="banner">
+  <div class="header-inner">
+    <div class="brand" aria-hidden="false">
+      <div class="mark">EX</div>
+      <div>
+        <div class="title">Expo — Demo</div>
+        <div class="muted" style="font-size:12px">未来をつくる展示会（デモ）</div>
+      </div>
+    </div>
+
+    <nav class="top-nav" role="navigation" aria-label="主要ナビゲーション">
+      <a href="#about">About</a>
+      <a href="#programs">Programs</a>
+      <a href="#news">News</a>
+      <a href="#access">Access</a>
+      <a href="#join" class="btn btn--outline" style="padding:8px 12px;border-radius:10px">Visit</a>
     </nav>
-  </header>
+  </div>
+</header>
 
-  <!-- メインビジュアル -->
-  <div class="hero">
-    森でつながる、あたたかい時間。
+<!-- Hero -->
+<section class="hero" role="region" aria-label="ファーストビュー">
+  <div class="hero-left">
+    <span class="eyebrow">Official Demo • 2025</span>
+    <h1 class="hero-title">いのち輝く未来社会のデザイン</h1>
+    <p class="hero-sub">このデモは万博サイト風のレイアウト・タイポグラフィ・色使いを再現したサンプルです。コンテンツは全部オリジナルで、GitHub Pagesでそのまま使えます。</p>
+    <div class="hero-cta">
+      <a href="#programs" class="btn btn--primary">参加する</a>
+      <a href="#news" class="btn btn--outline">最新情報を見る</a>
+    </div>
   </div>
 
-  <!-- コンテンツ -->
-  <main class="container">
-    <div class="card">
-      <h2>📢 お知らせ</h2>
-      <p>次回のイベントは「森の大収穫祭」！参加して限定アイテムを手に入れよう。</p>
+  <aside class="hero-right" aria-label="概要カード">
+    <div style="display:flex;gap:12px;align-items:center;margin-bottom:10px">
+      <div style="flex:1">
+        <div style="font-weight:800;font-size:15px">開催期間</div>
+        <div class="muted" style="margin-top:6px">2025年XX月XX日 〜 2025年YY月YY日</div>
+      </div>
     </div>
 
-    <div class="card">
-      <h2>🎮 サーバー紹介</h2>
-      <p>森の中にある村で、みんなでわいわい遊べるサーバーです。</p>
-      <button class="button">
-        <img src="https://stockmaterial.net/wp/wp-content/uploads/img/shop_coin02_01.png" alt="coin">
-        サーバーに参加する
-      </button>
-    </div>
+    <div class="meta-item"><div class="label">場所</div><div class="value">大阪・夢洲</div></div>
+    <div class="meta-item"><div class="label">来場見込み</div><div class="value">約X万人</div></div>
+    <div class="meta-item"><div class="label">テーマ</div><div class="value">未来社会の共創</div></div>
+  </aside>
+</section>
 
-    <div class="card">
-      <h2>📰 ニュース</h2>
-      <p>最新アップデート情報や開発日記をここでチェック！</p>
-    </div>
-  </main>
-
-  <!-- Discord広告 -->
-  <div class="discord-banner">
-    🌟 仲間が待ってる！<br>
-    <a href="https://discord.gg/xxxx" target="_blank">👉 Discordに参加</a>
+<!-- About -->
+<section id="about" class="site-section">
+  <div class="section-head">
+    <h3>About the Expo</h3>
+    <p class="muted">展示の目的、テーマの説明、ビジョンなどを簡潔に伝えます。</p>
   </div>
 
-  <!-- トップページに戻るボタン -->
-  <a href="/" class="back-home-btn" title="トップページに戻る">🏠</a>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+    <div class="card" style="padding:20px">
+      <h4 style="margin-top:0">テーマ紹介</h4>
+      <p class="muted">「いのち輝く未来社会のデザイン」を軸に、技術・文化・人のつながりを展示します。</p>
+    </div>
+    <div class="card" style="padding:20px">
+      <h4 style="margin-top:0">出展者</h4>
+      <p class="muted">国内外の企業・大学・団体が参加。さまざまなデモやワークショップを提供します。</p>
+    </div>
+    <div class="card" style="padding:20px">
+      <h4 style="margin-top:0">参加方法</h4>
+      <p class="muted">入場情報やチケット情報、ボランティア募集の案内を掲載します。</p>
+    </div>
+  </div>
+</section>
 
-  <!-- フッター -->
-  <footer>
-    © 2025 森のコミュニティ All Rights Reserved.
-  </footer>
+<!-- Programs / Events strip -->
+<section id="programs" class="site-section">
+  <div class="section-head">
+    <h3>Programs</h3>
+    <p class="muted">期間中に行われる主要プログラムをピックアップ。</p>
+  </div>
+
+  <div class="events-strip" aria-hidden="false">
+    <div class="event-pill">
+      <h5>オープニングセレモニー</h5>
+      <p class="muted">基調講演・パフォーマンスなど</p>
+    </div>
+    <div class="event-pill">
+      <h5>テクノロジーゾーン</h5>
+      <p class="muted">最新技術の体験展示</p>
+    </div>
+    <div class="event-pill">
+      <h5>カルチャーコラボ</h5>
+      <p class="muted">アーティストによる交流企画</p>
+    </div>
+    <div class="event-pill">
+      <h5>ワークショップ</h5>
+      <p class="muted">子ども向け体験や研究発表</p>
+    </div>
+  </div>
+</section>
+
+<!-- News -->
+<section id="news" class="site-section">
+  <div class="section-head">
+    <h3>News</h3>
+    <p class="muted">最新のお知らせをカードで表示</p>
+  </div>
+
+  <div class="news-grid" role="list">
+    <article class="news-card" role="listitem">
+      <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1533750349088-cd871a92f312?auto=format&fit=crop&w=1200&q=80')"></div>
+      <div class="body">
+        <div class="kicker">お知らせ</div>
+        <h4>会場アクセスのご案内</h4>
+        <p>交通機関やシャトルバスの情報を更新しました。最寄りのアクセス方法をご確認ください。</p>
+        <div class="meta"><span>2025-01-12</span><a href="#" class="cta-link">詳しく</a></div>
+      </div>
+    </article>
+
+    <article class="news-card" role="listitem">
+      <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80')"></div>
+      <div class="body">
+        <div class="kicker">イベント</div>
+        <h4>テクノロジーゾーン 出展者発表</h4>
+        <p>主要出展者と一部展示内容を公開しました。注目展示のハイライトをチェック。</p>
+        <div class="meta"><span>2025-02-03</span><a href="#" class="cta-link">詳しく</a></div>
+      </div>
+    </article>
+
+    <article class="news-card" role="listitem">
+      <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80')"></div>
+      <div class="body">
+        <div class="kicker">募集</div>
+        <h4>ボランティア募集のお知らせ</h4>
+        <p>運営スタッフやガイドの募集を開始しました。応募フォームはこちら。</p>
+        <div class="meta"><span>2025-03-10</span><a href="#" class="cta-link">応募する</a></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- Access -->
+<section id="access" class="site-section">
+  <div class="section-head">
+    <h3>Access</h3>
+    <p class="muted">会場（夢洲）までの行き方</p>
+  </div>
+
+  <div class="access-grid">
+    <div class="map-embed" aria-hidden="false">
+      <!-- Embed placeholder map (replace with actual iframe for production) -->
+      <img src="https://images.unsplash.com/photo-1505765053604-4b9b8a8c3b2b?auto=format&fit=crop&w=1200&q=60" alt="map placeholder" style="width:100%;height:100%;object-fit:cover;display:block">
+    </div>
+
+    <aside class="contact-card" aria-label="アクセス情報">
+      <h4 style="margin-top:0">会場情報</h4>
+      <p class="muted">〒554-0000 大阪府大阪市 夢洲エリア</p>
+      <p style="margin-top:14px">最寄り駅からのシャトルや臨時バス、車でのアクセス、障がい者対応の案内などを掲載。</p>
+      <div style="margin-top:18px"><a href="#" class="btn btn--outline">詳細なアクセス</a></div>
+    </aside>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <div>&copy; 2025 Expo Demo — All rights reserved.</div>
+    <div class="nav">
+      <a href="#" class="muted">運営について</a>
+      <a href="#" class="muted">プライバシー</a>
+      <a href="#" class="muted">お問い合わせ</a>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>
