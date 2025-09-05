@@ -3,151 +3,120 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>未来万博 2025</title>
+  <title>みんなの居場所</title>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* 全体設定 */
     body {
       margin: 0;
-      font-family: 'Helvetica Neue', 'Noto Sans JP', sans-serif;
-      color: #222;
-      background: #fdfdfd;
-      line-height: 1.8;
-      animation: fadeIn 1.2s ease-in;
+      font-family: 'Zen Maru Gothic', sans-serif;
+      background-color: #f5f8f5;
+      color: #333;
+      overflow-x: hidden;
+      text-align: left;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* キャッチコピー全画面 */
+    #splash {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: #2d6a4f;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 9999;
+      font-size: 2rem;
+      font-weight: bold;
+      animation: fadeOut 1s ease forwards;
+      animation-delay: 2.5s;
     }
 
-    /* ヘッダー */
+    #loading-text {
+      margin-top: 20px;
+      font-size: 1rem;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50%, 100% { opacity: 1; }
+      25%, 75% { opacity: 0; }
+    }
+
+    @keyframes fadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
+
     header {
-      background: linear-gradient(90deg, #0077ff, #00c6ff);
+      background-color: #40916c;
       color: white;
-      padding: 1.5rem 2rem;
-      text-align: center;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 2.2rem;
+      padding: 1rem;
+      font-size: 1.5rem;
       font-weight: bold;
-      letter-spacing: 1.5px;
+      border-bottom: 4px solid #1b4332;
     }
 
-    nav {
-      margin-top: 1rem;
-    }
-
-    nav a {
-      margin: 0 1rem;
-      text-decoration: none;
-      color: white;
-      font-weight: bold;
-      transition: opacity 0.3s;
-    }
-
-    nav a:hover {
-      opacity: 0.7;
-    }
-
-    /* セクション */
     section {
-      padding: 4rem 2rem;
-      text-align: center;
+      padding: 3rem 2rem;
     }
 
-    section h2 {
+    section:nth-child(even) {
+      background-color: #e9f5ee;
+    }
+
+    h2 {
       font-size: 1.8rem;
+      border-left: 6px solid #1b4332;
+      padding-left: 0.5rem;
       margin-bottom: 1rem;
-      border-bottom: 3px solid #0077ff;
-      display: inline-block;
-      padding-bottom: 0.3rem;
     }
 
-    .alt-bg {
-      background: #f4f8ff;
-    }
-
-    .card-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
+    p {
+      font-size: 1.1rem;
+      line-height: 1.8;
     }
 
     .card {
       background: white;
       border-radius: 12px;
-      padding: 2rem;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      padding: 1.5rem;
+      margin: 1rem 0;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       transition: transform 0.3s;
     }
 
     .card:hover {
       transform: translateY(-5px);
     }
-
-    .card h3 {
-      font-size: 1.3rem;
-      margin-bottom: 0.5rem;
-    }
-
-    /* フッター */
-    footer {
-      background: #222;
-      color: #fff;
-      padding: 2rem;
-      text-align: center;
-      font-size: 0.9rem;
-    }
-
-    footer a {
-      color: #00c6ff;
-      text-decoration: underline;
-    }
   </style>
 </head>
 <body>
+  <!-- キャッチコピー -->
+  <div id="splash">
+    <div>みんなの居場所。誰でも来れる居場所。</div>
+    <div id="loading-text">LOADING...</div>
+  </div>
+
+  <!-- 本体 -->
   <header>
-    <h1>未来万博 2025</h1>
-    <nav>
-      <a href="#about">概要</a>
-      <a href="#events">イベント</a>
-      <a href="#access">アクセス</a>
-    </nav>
+    みんなの居場所
   </header>
 
-  <section id="about">
-    <h2>万博について</h2>
-    <p>未来万博 2025 では、テクノロジー、文化、持続可能な社会をテーマに、世界中の最新イノベーションを体験できます。</p>
+  <section>
+    <h2>ごあいさつ</h2>
+    <p>ここは、誰でも安心して集まれるコミュニティの場です。落ち着いた空間で、あなたの「居場所」を見つけてください。</p>
   </section>
 
-  <section id="events" class="alt-bg">
-    <h2>イベント</h2>
-    <div class="card-container">
-      <div class="card">
-        <h3>オープニングセレモニー</h3>
-        <p>壮大な演出とともに幕を開ける式典。</p>
-      </div>
-      <div class="card">
-        <h3>テクノロジー展示</h3>
-        <p>未来の暮らしを体験できる最新技術が集結。</p>
-      </div>
-      <div class="card">
-        <h3>カルチャーパフォーマンス</h3>
-        <p>世界中の文化を体感できるライブや展示。</p>
-      </div>
-    </div>
+  <section>
+    <h2>最新のお知らせ</h2>
+    <div class="card">イベント「交流会」を来週開催します！</div>
+    <div class="card">サイトがリニューアルしました。</div>
   </section>
 
-  <section id="access">
+  <section>
     <h2>アクセス</h2>
-    <p>大阪・夢洲特設会場にて開催。<br>最寄り駅から会場までは無料シャトルバスをご利用いただけます。</p>
+    <p>○○駅から徒歩5分の場所にあります。お気軽にお立ち寄りください。</p>
   </section>
-
-  <footer>
-    <p>&copy; 2025 未来万博 All Rights Reserved. | <a href="#">お問い合わせ</a></p>
-  </footer>
 </body>
 </html>
