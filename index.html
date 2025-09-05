@@ -18,43 +18,59 @@
     header {
       background: #a47148;
       background-image: linear-gradient(145deg, #a47148, #7a5230);
-      padding: 20px;
+      padding: 25px 15px;
       text-align: center;
-      border-bottom: 8px solid #654321;
-      font-size: 32px;
+      border-bottom: 10px solid #654321;
+      font-size: 30px;
       font-weight: 700;
       color: #fff;
       text-shadow: 2px 2px #4a2f1d;
       border-radius: 0 0 20px 20px;
     }
 
-    /* メインレイアウト */
-    .container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      padding: 30px;
+    /* ナビゲーション */
+    nav {
+      margin-top: 10px;
+    }
+    nav a {
+      margin: 0 12px;
+      color: #fff8e1;
+      text-decoration: none;
+      font-weight: bold;
+      border-bottom: 2px dashed transparent;
+      transition: 0.2s;
+    }
+    nav a:hover {
+      border-bottom: 2px dashed #fff;
     }
 
+    /* コンテナ */
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    /* カード */
     .card {
-      background: #fff8f0;
+      background: #fffdf8;
       border: 3px dashed #c49a6c;
-      border-radius: 16px;
-      padding: 20px;
-      box-shadow: 4px 4px 10px rgba(0,0,0,0.2);
+      border-radius: 18px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 4px 4px 10px rgba(0,0,0,0.15);
       transition: transform 0.2s;
     }
-
     .card:hover {
-      transform: scale(1.02);
+      transform: scale(1.01);
     }
-
     .card h2 {
-      font-size: 24px;
+      font-size: 22px;
       margin-top: 0;
-      color: #7a5230;
+      color: #6b4226;
     }
 
+    /* ボタン */
     .button {
       display: inline-flex;
       align-items: center;
@@ -68,53 +84,49 @@
       box-shadow: inset 0 0 5px #fff, 2px 2px 5px rgba(0,0,0,0.2);
       transition: transform 0.2s;
     }
-
     .button:hover {
       transform: translateY(-2px);
     }
-
     .button img {
       width: 20px;
       height: 20px;
     }
 
-    /* Discord広告（固定） */
+    /* Discord広告 */
     .discord-banner {
       position: fixed;
       right: 20px;
       bottom: 20px;
-      width: 180px;
+      width: 200px;
       background: #5865F2;
       color: white;
       padding: 15px;
-      border-radius: 12px;
-      font-size: 16px;
+      border-radius: 14px;
+      font-size: 15px;
       text-align: center;
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
       animation: pulse 2s infinite;
       z-index: 1000;
     }
-
     .discord-banner a {
       color: white;
       font-weight: bold;
       text-decoration: none;
     }
-
     @keyframes pulse {
       0% { transform: scale(1); }
       50% { transform: scale(1.05); }
       100% { transform: scale(1); }
     }
 
-    /* 🏠 トップページに戻るボタン */
+    /* トップに戻るボタン */
     .back-home-btn {
       position: fixed;
-      bottom: 110px; /* Discord広告のちょっと上 */
+      bottom: 110px;
       right: 40px;
-      background: #a8d5ba; /* パステルグリーン */
+      background: #a8d5ba;
       color: white;
-      font-size: 28px;
+      font-size: 26px;
       text-decoration: none;
       border-radius: 50%;
       width: 60px;
@@ -126,7 +138,6 @@
       transition: transform 0.2s, box-shadow 0.2s;
       z-index: 1001;
     }
-
     .back-home-btn:hover {
       transform: scale(1.1);
       box-shadow: 0 6px 14px rgba(0,0,0,0.3);
@@ -137,20 +148,36 @@
 </head>
 <body>
 
-  <header>🌳 森のコミュニティへようこそ 🌳</header>
+  <!-- ヘッダー -->
+  <header>
+    🌲 森のコミュニティ
+    <nav>
+      <a href="#">ホーム</a>
+      <a href="#">お知らせ</a>
+      <a href="#">サーバー</a>
+      <a href="#">参加方法</a>
+    </nav>
+  </header>
 
+  <!-- コンテンツ -->
   <main class="container">
     <div class="card">
+      <h2>📢 お知らせ</h2>
+      <p>次回のイベントは「森の大収穫祭」！参加して限定アイテムを手に入れよう。</p>
+    </div>
+
+    <div class="card">
       <h2>🎮 サーバー紹介</h2>
-      <p>ここは森の中にある小さな村。仲間と一緒に遊べる場所です！</p>
+      <p>森の中にある村で、みんなでわいわい遊べるサーバーです。</p>
       <button class="button">
         <img src="https://stockmaterial.net/wp/wp-content/uploads/img/shop_coin02_01.png" alt="coin">
-        サーバーに参加
+        サーバーに参加する
       </button>
     </div>
+
     <div class="card">
-      <h2>📰 最新情報</h2>
-      <p>イベントやアップデートの情報をここでチェック！</p>
+      <h2>📰 ニュース</h2>
+      <p>最新アップデート情報や開発日記をここでチェック！</p>
     </div>
   </main>
 
