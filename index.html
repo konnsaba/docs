@@ -3,129 +3,177 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>森のゲーム風サイト</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>刺繍風ゲームUI</title>
   <style>
     body {
-      font-family: 'Zen Maru Gothic', 'Nunito', sans-serif;
-      background: linear-gradient(to bottom, #d8f3dc, #b7e4c7);
+      margin: 0;
+      font-family: 'Zen Maru Gothic', sans-serif;
+      background: repeating-linear-gradient(
+        45deg,
+        #f9f9f9,
+        #f9f9f9 10px,
+        #f1f1f1 10px,
+        #f1f1f1 20px
+      );
     }
-    /* 森っぽい雲や木のデコ */
-    .cloud {
+
+    /* ヘッダー (布っぽい皮生地) */
+    header {
+      background: repeating-linear-gradient(
+        135deg,
+        #d4a373,
+        #d4a373 15px,
+        #c68b59 15px,
+        #c68b59 30px
+      );
+      border-bottom: 6px dashed #fff;
+      box-shadow: inset 0 4px 10px rgba(0,0,0,0.2);
+      padding: 20px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      color: #fff;
+      font-size: 2rem;
+      text-shadow: 1px 2px 0px #a0522d;
+    }
+
+    nav a {
+      color: #fff;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+      position: relative;
+    }
+    nav a::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 3px;
+      background: #fff;
       position: absolute;
-      background: white;
+      left: 0;
+      bottom: -6px;
+      border-radius: 2px;
+      opacity: 0;
+      transition: 0.3s;
+    }
+    nav a:hover::after {
+      opacity: 1;
+    }
+
+    /* 刺繍風ボタン（コインボタン） */
+    .button {
+      display: inline-block;
+      padding: 16px 24px;
       border-radius: 50%;
-      opacity: 0.8;
+      background: radial-gradient(circle at 30% 30%, #ffd966, #e6b800);
+      border: 4px dashed #fff;
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #5c3d00;
+      text-align: center;
+      cursor: pointer;
+      box-shadow:
+        inset 3px 3px 6px rgba(255,255,255,0.8),
+        inset -3px -3px 6px rgba(0,0,0,0.2),
+        0 4px 8px rgba(0,0,0,0.2);
+      transition: transform 0.1s;
     }
-    .cloud1 { width: 120px; height: 60px; top: 10%; left: 15%; }
-    .cloud2 { width: 90px; height: 45px; top: 20%; right: 20%; }
-    .tree {
-      position: absolute;
-      bottom: 0;
-      width: 100px;
-      height: 150px;
-      background: #2d6a4f;
-      border-radius: 50% 50% 0 0;
+    .button:active {
+      transform: scale(0.95);
     }
-    .tree::after {
-      content: '';
-      position: absolute;
-      bottom: -40px;
-      left: 40%;
-      width: 20px;
-      height: 40px;
-      background: #8d6e63;
+
+    /* セクション（布パネル） */
+    section {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 30px;
+      background: #fff;
+      border: 6px dashed #e6c200;
+      border-radius: 20px;
+      box-shadow: inset 0 3px 10px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.1);
     }
-    /* Discord 広告 */
+    section h2 {
+      text-align: center;
+      font-size: 2rem;
+      color: #6b4226;
+      margin-bottom: 20px;
+    }
+
+    /* Discord広告 (刺繍風リボン) */
     .discord-banner {
       position: fixed;
       right: 20px;
-      bottom: 50%;
-      transform: translateY(50%);
+      bottom: 40%;
       background: #5865F2;
       color: white;
-      padding: 16px 24px;
-      border-radius: 1rem;
-      font-size: 1.1rem;
+      padding: 16px 30px;
+      border-radius: 40px;
       font-weight: bold;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      font-size: 1.1rem;
+      border: 4px dashed #fff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       animation: bounce 2s infinite;
+      text-decoration: none;
     }
     @keyframes bounce {
-      0%, 100% { transform: translateY(50%) scale(1); }
-      50% { transform: translateY(50%) scale(1.05); }
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
     }
   </style>
-  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body class="relative overflow-x-hidden">
-
-  <!-- 森の雲や木 -->
-  <div class="cloud cloud1"></div>
-  <div class="cloud cloud2"></div>
-  <div class="tree left-10"></div>
-  <div class="tree left-40"></div>
-  <div class="tree right-20"></div>
+<body>
 
   <!-- ヘッダー -->
-  <header class="w-full bg-green-200 bg-opacity-80 shadow-md fixed top-0 z-50">
-    <div class="max-w-6xl mx-auto flex justify-between items-center px-6 py-3">
-      <h1 class="text-3xl font-bold text-green-900">森のまち</h1>
-      <nav class="space-x-6 text-green-800 font-semibold">
-        <a href="#about" class="hover:text-green-600">About</a>
-        <a href="#news" class="hover:text-green-600">News</a>
-        <a href="#access" class="hover:text-green-600">Access</a>
-      </nav>
-    </div>
+  <header>
+    <h1>森の刺繍サイト</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#news">News</a>
+      <a href="#access">Access</a>
+    </nav>
   </header>
 
   <!-- メインビジュアル -->
-  <section class="h-screen flex flex-col justify-center items-center text-center relative z-10">
-    <h2 class="text-5xl md:text-6xl font-extrabold text-green-900 drop-shadow-md">ようこそ 森のまちへ</h2>
-    <p class="mt-6 text-lg md:text-2xl text-green-800">みんなでつくる、かわいいゲーム風コミュニティ</p>
-    <button class="mt-8 bg-pink-300 hover:bg-pink-400 text-white text-xl px-8 py-3 rounded-full shadow-lg">
-      はじめる
-    </button>
+  <section>
+    <h2>ようこそ！</h2>
+    <p>ここは刺繍や布生地をテーマにしたゲーム風UIのサイトです。</p>
+    <div style="text-align:center; margin-top:20px;">
+      <div class="button">Start</div>
+    </div>
   </section>
 
   <!-- About -->
-  <section id="about" class="max-w-4xl mx-auto bg-white bg-opacity-80 rounded-2xl shadow-md p-10 my-20 text-center">
-    <h2 class="text-3xl font-bold text-green-900 mb-6">About</h2>
-    <p class="text-lg text-green-700 leading-relaxed">
-      森のまちは、みんなで楽しく遊べる場所。<br>
-      パステルカラーの世界で、新しい仲間と出会おう！
+  <section id="about">
+    <h2>About</h2>
+    <p>
+      このサイトはツムツムやポケ森のように可愛いパステルカラーで、<br>
+      ボタンやパネルは刺繍のようなデザインにしています。
     </p>
   </section>
 
   <!-- News -->
-  <section id="news" class="max-w-5xl mx-auto grid md:grid-cols-3 gap-8 my-20 px-6">
-    <div class="bg-pink-100 p-6 rounded-2xl shadow-lg text-center">
-      <h3 class="text-xl font-bold text-pink-700 mb-2">イベント 1</h3>
-      <p>春のお花見パーティ開催！</p>
-    </div>
-    <div class="bg-yellow-100 p-6 rounded-2xl shadow-lg text-center">
-      <h3 class="text-xl font-bold text-yellow-700 mb-2">イベント 2</h3>
-      <p>森のクラフトコンテスト</p>
-    </div>
-    <div class="bg-blue-100 p-6 rounded-2xl shadow-lg text-center">
-      <h3 class="text-xl font-bold text-blue-700 mb-2">イベント 3</h3>
-      <p>夏祭り & 花火大会</p>
-    </div>
+  <section id="news">
+    <h2>News</h2>
+    <ul>
+      <li>🎉 新しい森のイベントが始まりました！</li>
+      <li>🌼 刺繍ボタンのコレクションを追加しました。</li>
+      <li>🌲 Discordで仲間と交流しよう！</li>
+    </ul>
   </section>
 
   <!-- Access -->
-  <section id="access" class="max-w-4xl mx-auto bg-green-100 rounded-2xl shadow-md p-10 my-20 text-center">
-    <h2 class="text-3xl font-bold text-green-900 mb-6">Access</h2>
-    <p class="text-lg text-green-700">森のまちへようこそ！<br>参加方法はシンプル。みんなで遊びに来てね。</p>
+  <section id="access">
+    <h2>Access</h2>
+    <p>森の刺繍コミュニティにようこそ！<br>ぜひ一緒に遊びましょう。</p>
   </section>
 
-  <!-- フッター -->
-  <footer class="bg-green-800 text-green-100 py-6 text-center">
-    <p>© 2025 森のまち - Game UI風サイト</p>
-  </footer>
-
-  <!-- Discord 広告 -->
-  <a href="https://discord.gg/xxxxx" target="_blank" class="discord-banner">
+  <!-- Discord広告 -->
+  <a href="https://discord.gg/xxxx" target="_blank" class="discord-banner">
     🌲 Discordに参加する
   </a>
 
