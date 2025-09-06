@@ -8,7 +8,7 @@
     #loading {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: #76bb40; /* 森のグリーン */
+      background: #76bb40;
       display: flex; justify-content: center; align-items: center;
       flex-direction: column;
       color: white;
@@ -67,29 +67,44 @@
       width: 100%;
     }
 
-    /* ---------------- ベース ---------------- */
-    body {
-      margin: 0;
-      font-family: 'Noto Sans JP', sans-serif;
-      color: #2f3e2f;
-      background: #fff;
-      line-height: 1.8;
-      overflow-x: hidden;
-    }
-    header {
-      background: #76bb40;
+    /* ---------------- 動画背景 ---------------- */
+    .hero {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
       color: white;
-      padding: 8rem 8% 5rem;
-      margin-top: 60px; /* navの高さ調整 */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
     }
-    header h1 {
-      font-size: 3rem;
+    .hero video {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      filter: brightness(0.6);
+    }
+    .hero h1 {
+      font-size: 4rem;
       margin: 0;
-      font-weight: 700;
+      animation: fadeInDown 1.5s ease;
     }
-    header p {
+    .hero p {
+      font-size: 1.5rem;
       margin-top: 1rem;
-      font-size: 1.3rem;
+      animation: fadeInUp 2s ease;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* ---------------- セクション ---------------- */
@@ -162,7 +177,7 @@
         document.getElementById("loading").style.display = "none";
       }, 3000);
 
-      // セクションのスクロールアニメーション
+      // スクロールアニメーション
       const sections = document.querySelectorAll("section");
       const cards = document.querySelectorAll(".card");
       const observer = new IntersectionObserver(entries => {
@@ -194,11 +209,14 @@
     </ul>
   </nav>
 
-  <!-- ヘッダー -->
-  <header>
+  <!-- ヒーロー（動画背景） -->
+  <div class="hero">
+    <video autoplay muted loop>
+      <source src="https://www.w3schools.com/howto/rain.mp4" type="video/mp4">
+    </video>
     <h1>森ねこ鯖</h1>
     <p>みんなの居場所。誰でも来れる居場所。</p>
-  </header>
+  </div>
 
   <!-- コンテンツ -->
   <section id="intro">
