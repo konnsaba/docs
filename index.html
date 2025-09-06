@@ -4,49 +4,88 @@
   <meta charset="UTF-8">
   <title>みんなの居場所</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&display=swap');
+
     body {
       margin: 0;
       font-family: 'Zen Maru Gothic', sans-serif;
-      background: #f5f9f5;
-      color: #333;
-      text-align: left;
+      background: #f0f8f0;
+      color: #2f3e2f;
+      text-align: left; /* 左寄せ */
     }
 
-    /* --- 読み込みスピナー --- */
+    /* ===== 読み込み画面 ===== */
     #loading {
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: #f5f9f5;
+      background: linear-gradient(135deg, #dff0d8, #a3d9a5);
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       z-index: 1000;
     }
 
     .spinner {
-      width: 50px;
-      height: 50px;
-      border: 7px solid rgba(0, 0, 0, 0.1);
+      width: 60px;
+      height: 60px;
+      border: 8px solid rgba(255, 255, 255, 0.3);
       border-radius: 50%;
-      border-top-color: #76bb40; /* 目に優しい緑 */
-      animation: spin 1s ease-in-out infinite;
+      border-top-color: #2f6f2f;
+      animation: spin 1s linear infinite;
+      margin-bottom: 20px;
     }
 
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
 
-    /* --- メインコンテンツ --- */
-    .container {
-      padding: 30px;
+    #loading p {
+      font-size: 1.3rem;
+      color: #2f3e2f;
+      font-weight: bold;
+      letter-spacing: 2px;
     }
 
-    .catch-copy {
-      font-size: 2rem;
-      font-weight: bold;
-      margin-bottom: 20px;
+    /* ===== セクションごとに背景変化 ===== */
+    section {
+      padding: 60px 20px;
+      border-bottom: 2px dashed #cde0cd;
+    }
+
+    .section-1 {
+      background: linear-gradient(to right, #e8f5e9, #c8e6c9);
+    }
+
+    .section-2 {
+      background: linear-gradient(to right, #f1f8e9, #dcedc8);
+    }
+
+    .section-3 {
+      background: linear-gradient(to right, #e0f2f1, #b2dfdb);
+    }
+
+    /* ===== テキストデザイン ===== */
+    h1, h2 {
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase; /* 大文字 */
+      text-decoration: underline; /* 下線 */
+      margin-bottom: 15px;
       color: #2f6f2f;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      max-width: 800px;
+      margin-right: auto; /* 左寄せ維持 */
+    }
+
+    /* ===== コンテナ ===== */
+    .container {
+      padding: 30px;
     }
   </style>
 </head>
@@ -54,12 +93,34 @@
   <!-- 読み込み画面 -->
   <div id="loading">
     <div class="spinner"></div>
+    <p>森の中を読み込み中…</p>
   </div>
 
-  <!-- メイン -->
+  <!-- コンテンツ -->
   <div class="container" id="main-content" style="display:none;">
-    <div class="catch-copy">みんなの居場所。誰でも来れる居場所。</div>
-    <p>ここにサイトの本文やメニューが入ります。</p>
+    <section class="section-1">
+      <h1>みんなの居場所。誰でも来れる居場所。</h1>
+      <p>
+        森のように落ち着き、安心できる空間を提供します。<br>
+        ここは誰でも気軽に来られる「居場所」です。
+      </p>
+    </section>
+
+    <section class="section-2">
+      <h2>ABOUT</h2>
+      <p>
+        緑を感じられる空間で、訪れる人に心の安らぎを。<br>
+        サイト全体を通して「森」をイメージしています。
+      </p>
+    </section>
+
+    <section class="section-3">
+      <h2>CONTACT</h2>
+      <p>
+        お問い合わせはこちらから。<br>
+        あなたの声を、私たちは大切にします。
+      </p>
+    </section>
   </div>
 
   <script>
