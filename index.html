@@ -4,190 +4,129 @@
   <meta charset="UTF-8">
   <title>森ねこ鯖</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&family=Nunito:wght@400;700&display=swap');
-
-    body {
-      margin: 0;
-      font-family: 'Zen Maru Gothic', 'Nunito', sans-serif;
-      color: #2f3e2f;
-      line-height: 1.8;
-      background: #f9faf9;
-    }
-
-    /* ===== 読み込み画面 ===== */
+    /* ---------------- ローディング ---------------- */
     #loading {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: linear-gradient(135deg, #dff0d8, #a3d9a5);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: #f0f7f2;
+      display: flex; justify-content: center; align-items: center;
       z-index: 1000;
+      flex-direction: column;
+      font-family: 'Zen Maru Gothic', sans-serif;
+      color: #3b5e3b;
     }
-
     .spinner {
       width: 60px;
       height: 60px;
-      border: 8px solid rgba(255, 255, 255, 0.3);
+      border: 7px solid rgba(0,0,0,0.1);
       border-radius: 50%;
-      border-top-color: #2f6f2f;
-      animation: spin 1s linear infinite;
-      margin-bottom: 20px;
+      border-top-color: #76bb40;
+      animation: spin 1s ease-in-out infinite;
+      margin-bottom: 15px;
     }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    #loading p {
-      font-size: 1.4rem;
-      font-weight: bold;
+    /* ---------------- ベース ---------------- */
+    body {
+      margin: 0;
+      font-family: 'Zen Maru Gothic', sans-serif;
       color: #2f3e2f;
-      letter-spacing: 2px;
+      background: #ffffff;
+      line-height: 1.8;
+      text-align: left; /* 左寄せ */
     }
-
-    /* ===== ナビゲーション ===== */
-    nav {
-      background: #2f6f2f;
-      color: #fff;
-      padding: 15px 30px;
-      font-family: 'Nunito', sans-serif;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 10;
+    header {
+      background: #76bb40;
+      color: white;
+      padding: 2.5rem;
+      text-align: left;
     }
-
-    nav h1 {
+    header h1 {
+      font-size: 2.8rem;
       margin: 0;
-      font-size: 1.6rem;
-      letter-spacing: 2px;
+    }
+    header p {
+      font-size: 1.2rem;
+      margin: 0.5rem 0 0;
     }
 
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 25px;
-      margin: 0;
-      padding: 0;
-    }
-
-    nav ul li {
-      cursor: pointer;
-      font-weight: bold;
-      text-transform: uppercase;
-      transition: opacity 0.3s;
-    }
-
-    nav ul li:hover {
-      opacity: 0.7;
-    }
-
-    /* ===== セクション ===== */
+    /* ---------------- セクション ---------------- */
     section {
-      padding: 80px 20px;
+      padding: 4rem 8%;
+      position: relative;
+    }
+    .alt-bg {
+      background: #f4faf4;
     }
 
-    /* 背景を交互に設定 */
-    section.alt {
-      background: #eaf5ea;
-    }
-
-    .inner {
-      max-width: 900px;
-      margin: auto;
-    }
-
+    /* ---------------- 見出し装飾（図形の線） ---------------- */
     h2 {
       font-size: 2rem;
-      margin-bottom: 15px;
-      text-decoration: underline;
-      color: #2f6f2f;
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 0.3rem;
+    }
+    h2::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 60%;
+      height: 5px;
+      background: #76bb40;
+      border-radius: 3px;
     }
 
-    p {
-      font-size: 1.1rem;
-      max-width: 700px;
-    }
-
-    /* ===== カード風デザイン例 ===== */
-    .card {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      padding: 20px;
-      margin-top: 20px;
-      transition: transform 0.3s;
-    }
-    .card:hover {
-      transform: translateY(-5px);
+    /* ---------------- フッター ---------------- */
+    footer {
+      background: #2f3e2f;
+      color: white;
+      text-align: center;
+      padding: 2rem;
     }
   </style>
-</head>
-<body>
-  <!-- 読み込み画面 -->
-  <div id="loading">
-    <div class="spinner"></div>
-    <p>森ねこ鯖を読み込み中…</p>
-  </div>
-
-  <!-- ナビゲーション -->
-  <nav>
-    <h1>森ねこ鯖</h1>
-    <ul>
-      <li>HOME</li>
-      <li>ABOUT</li>
-      <li>CONTACT</li>
-    </ul>
-  </nav>
-
-  <!-- コンテンツ -->
-  <div id="main-content" style="display:none;">
-    <section class="alt">
-      <div class="inner">
-        <h2>みんなの居場所</h2>
-        <p>
-          「森ねこ鯖」は、森のように落ち着き安心できる空間。<br>
-          誰でも気軽に訪れられる「居場所」を目指しています。
-        </p>
-        <div class="card">
-          例：最新のお知らせやトピックをカード風にまとめると見やすくなります。
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="inner">
-        <h2>ABOUT</h2>
-        <p>
-          緑に包まれたやさしいデザインを通して、訪れる人に安らぎを感じてもらえるようにしました。
-        </p>
-      </div>
-    </section>
-
-    <section class="alt">
-      <div class="inner">
-        <h2>CONTACT</h2>
-        <p>
-          ご意見・ご相談はこちらからどうぞ。<br>
-          あなたの声を、私たちは大切にします。
-        </p>
-      </div>
-    </section>
-  </div>
-
   <script>
-    // ページが読み込み終わってから3秒後に表示
+    // ローディング3秒後に消える
     window.addEventListener("load", () => {
       setTimeout(() => {
         document.getElementById("loading").style.display = "none";
-        document.getElementById("main-content").style.display = "block";
       }, 3000);
     });
   </script>
+</head>
+<body>
+  <!-- ローディング画面 -->
+  <div id="loading">
+    <div class="spinner"></div>
+    <p>読み込み中...</p>
+  </div>
+
+  <!-- ヘッダー -->
+  <header>
+    <h1>森ねこ鯖</h1>
+    <p>みんなの居場所。誰でも来れる居場所。</p>
+  </header>
+
+  <!-- コンテンツ -->
+  <section>
+    <h2>サーバー紹介</h2>
+    <p>森の中にあるような優しいコミュニティをイメージしています。安心して遊べるサーバーを目指しています。</p>
+  </section>
+
+  <section class="alt-bg">
+    <h2>遊び方</h2>
+    <p>サーバーにログインする方法や、サポート情報をここに掲載します。初めての人でも迷わず参加できます。</p>
+  </section>
+
+  <section>
+    <h2>最新ニュース</h2>
+    <p>アップデートやイベントの告知をこちらに掲載します。</p>
+  </section>
+
+  <!-- フッター -->
+  <footer>
+    <p>&copy; 2025 森ねこ鯖</p>
+  </footer>
 </body>
 </html>
