@@ -8,74 +8,143 @@
     #loading {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: #f0f7f2;
+      background: #76bb40; /* 森のグリーン */
       display: flex; justify-content: center; align-items: center;
-      z-index: 1000;
       flex-direction: column;
-      font-family: 'Zen Maru Gothic', sans-serif;
-      color: #3b5e3b;
+      color: white;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 1.5rem;
+      z-index: 2000;
     }
     .spinner {
-      width: 60px;
-      height: 60px;
-      border: 7px solid rgba(0,0,0,0.1);
+      width: 70px; height: 70px;
+      border: 8px solid rgba(255,255,255,0.3);
       border-radius: 50%;
-      border-top-color: #76bb40;
-      animation: spin 1s ease-in-out infinite;
-      margin-bottom: 15px;
+      border-top-color: #fff;
+      animation: spin 1s linear infinite;
+      margin-bottom: 20px;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ---------------- ナビゲーション ---------------- */
+    nav {
+      position: fixed;
+      top: 0; left: 0; width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      z-index: 1000;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 8%;
+    }
+    nav .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #2f3e2f;
+    }
+    nav ul {
+      list-style: none;
+      margin: 0; padding: 0;
+      display: flex;
+      gap: 2rem;
+    }
+    nav ul li a {
+      text-decoration: none;
+      font-weight: bold;
+      color: #2f3e2f;
+      position: relative;
+      padding-bottom: 4px;
+    }
+    nav ul li a::after {
+      content: "";
+      position: absolute;
+      left: 0; bottom: 0;
+      width: 0%;
+      height: 3px;
+      background: #76bb40;
+      transition: width 0.3s ease;
+    }
+    nav ul li a:hover::after {
+      width: 100%;
+    }
 
     /* ---------------- ベース ---------------- */
     body {
       margin: 0;
-      font-family: 'Zen Maru Gothic', sans-serif;
+      font-family: 'Noto Sans JP', sans-serif;
       color: #2f3e2f;
-      background: #ffffff;
+      background: #fff;
       line-height: 1.8;
-      text-align: left; /* 左寄せ */
+      overflow-x: hidden;
     }
     header {
       background: #76bb40;
       color: white;
-      padding: 2.5rem;
-      text-align: left;
+      padding: 8rem 8% 5rem;
+      margin-top: 60px; /* navの高さ調整 */
     }
     header h1 {
-      font-size: 2.8rem;
+      font-size: 3rem;
       margin: 0;
+      font-weight: 700;
     }
     header p {
-      font-size: 1.2rem;
-      margin: 0.5rem 0 0;
+      margin-top: 1rem;
+      font-size: 1.3rem;
     }
 
     /* ---------------- セクション ---------------- */
     section {
-      padding: 4rem 8%;
+      padding: 6rem 8%;
       position: relative;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     .alt-bg {
       background: #f4faf4;
     }
 
-    /* ---------------- 見出し装飾（図形の線） ---------------- */
+    /* ---------------- 見出し装飾 ---------------- */
     h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
       position: relative;
+      font-weight: 700;
       display: inline-block;
-      padding-bottom: 0.3rem;
+      padding-bottom: 0.4rem;
     }
     h2::after {
       content: "";
       position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 60%;
-      height: 5px;
+      left: 0; bottom: 0;
+      width: 70%;
+      height: 6px;
       background: #76bb40;
       border-radius: 3px;
+    }
+
+    /* ---------------- カード ---------------- */
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      margin: 1.5rem 0;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
     }
 
     /* ---------------- フッター ---------------- */
@@ -92,6 +161,19 @@
       setTimeout(() => {
         document.getElementById("loading").style.display = "none";
       }, 3000);
+
+      // セクションのスクロールアニメーション
+      const sections = document.querySelectorAll("section");
+      const cards = document.querySelectorAll(".card");
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, { threshold: 0.2 });
+      sections.forEach(sec => observer.observe(sec));
+      cards.forEach(card => observer.observe(card));
     });
   </script>
 </head>
@@ -102,6 +184,16 @@
     <p>読み込み中...</p>
   </div>
 
+  <!-- ナビゲーション -->
+  <nav>
+    <div class="logo">森ねこ鯖</div>
+    <ul>
+      <li><a href="#intro">紹介</a></li>
+      <li><a href="#play">遊び方</a></li>
+      <li><a href="#news">ニュース</a></li>
+    </ul>
+  </nav>
+
   <!-- ヘッダー -->
   <header>
     <h1>森ねこ鯖</h1>
@@ -109,19 +201,28 @@
   </header>
 
   <!-- コンテンツ -->
-  <section>
+  <section id="intro">
     <h2>サーバー紹介</h2>
-    <p>森の中にあるような優しいコミュニティをイメージしています。安心して遊べるサーバーを目指しています。</p>
+    <div class="card">
+      <p>森の中にあるような安心できるコミュニティを目指しています。仲間と一緒に落ち着いた時間を楽しめます。</p>
+    </div>
   </section>
 
-  <section class="alt-bg">
+  <section id="play" class="alt-bg">
     <h2>遊び方</h2>
-    <p>サーバーにログインする方法や、サポート情報をここに掲載します。初めての人でも迷わず参加できます。</p>
+    <div class="card">
+      <p>サーバーにログインする方法やルールをわかりやすくまとめています。初めての人でも迷わず参加できます。</p>
+    </div>
+    <div class="card">
+      <p>マルチプレイの楽しみ方やイベントの情報も掲載しています！</p>
+    </div>
   </section>
 
-  <section>
+  <section id="news">
     <h2>最新ニュース</h2>
-    <p>アップデートやイベントの告知をこちらに掲載します。</p>
+    <div class="card">
+      <p>アップデートやイベント情報を定期的に発信中。新しい取り組みにご期待ください！</p>
+    </div>
   </section>
 
   <!-- フッター -->
